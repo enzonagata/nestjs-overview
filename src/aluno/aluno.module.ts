@@ -14,6 +14,6 @@ export class AlunoModule implements NestModule {
       .exclude({
         path: 'aluno/cadastro', method: RequestMethod.GET
       })
-      .forRoutes({ path: 'aluno', method: RequestMethod.GET });
+      .forRoutes(AlunoController);
   }
 }
