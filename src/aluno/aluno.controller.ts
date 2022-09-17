@@ -8,4 +8,9 @@ export class AlunoController {
         return "Hello aluno!";
     }
 
+    @Get('cadastro')
+    alunoCadastro() {
+        return "Cadastro de Aluno...";
+    }
+
 }
