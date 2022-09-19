@@ -15,7 +15,6 @@ export class AlunoController {
         return "Aluno salvar...";
     }
 
-
     @Get('cadastro')
     alunoCadastro() {
         return "Cadastro de Aluno...";

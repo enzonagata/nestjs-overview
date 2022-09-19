@@ -8,12 +8,13 @@ import { logger } from './middleware/logger.middleware';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(logger);
-  app.useGlobalPipes(new ValidationPipe(
-    {
-      whitelist: true,
-      exceptionFactory: validationExceptionFactory
-    }
-  ))
+  app.useGlobalPipes(new ValidationPipe())
+
+  // app.useGlobalPipes(new ValidationPipe({
+  //   whitelist: true,
+  //   exceptionFactory: validationExceptionFactory
+  // }))
+
   app.useGlobalFilters(new ExceptionsFilter());
   await app.listen(3000);
 }

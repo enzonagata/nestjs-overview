@@ -7,8 +7,12 @@ export class ExceptionsFilter<T> implements ExceptionFilter {
     console.log('Call exception filter...');
     const context = host.switchToHttp();
     const response = context.getResponse<Response>();
-    const statusCode = exception.response.statusCode;
-    response.status(statusCode).send(this.buildError(exception.response.validationResult, statusCode));
+
+    // Para usar com o validation.exeption.factory
+    // const statusCode = exception.response.statusCode;
+    // response.status(statusCode).send(this.buildError(exception.response.validationResult, statusCode));
+
+    response.status(exception.status).send(this.buildError(exception.response.message, exception.status));
   }
 
   buildError(
