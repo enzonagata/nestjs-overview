@@ -1,6 +1,5 @@
 import { Controller, Get, HttpException, HttpStatus } from '@nestjs/common';
 
-
 @Controller('aluno')
 export class AlunoController {
 
