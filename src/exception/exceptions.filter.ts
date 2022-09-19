@@ -3,11 +3,12 @@ import { Response } from 'express';
 
 @Catch()
 export class ExceptionsFilter<T> implements ExceptionFilter {
-  catch(exception: Error, host: ArgumentsHost) {
+  catch(exception: any, host: ArgumentsHost) {
     console.log('Call exception filter...');
     const context = host.switchToHttp();
     const response = context.getResponse<Response>();
-    response.status(response.statusCode).send(this.buildError(exception.message, response.statusCode));
+    const statusCode = exception.response.statusCode;
+    response.status(statusCode).send(this.buildError(exception.response.validationResult, statusCode));
   }
 
   buildError(
