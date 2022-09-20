@@ -1,8 +1,12 @@
-import { Controller, Get, Post, Body, HttpException, HttpStatus, Param, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, HttpException, HttpStatus, Param, ParseIntPipe, UseGuards } from '@nestjs/common';
+//import { AuthGuard } from 'src/auth/auth.guard';
 import { AlunoDTO } from './dto/aluno.dto';
 
+
+//@UseGuards(AuthGuard)
 @Controller('aluno')
 export class AlunoController {
+
 
     @Get()
     alunoGet() {
