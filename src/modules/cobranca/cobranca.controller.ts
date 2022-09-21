@@ -1,9 +1,9 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Post } from '@nestjs/common';
 
 @Controller('cobranca')
 export class CobrancaController {
-    @Get()
-    cobrancaGet() {
-        return 'Hello cobrança!';
-    }
+  @Post('cadastro')
+  cobrancaGet() {
+    return 'Hello cobrança!';
+  }
 }

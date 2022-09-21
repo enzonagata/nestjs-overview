@@ -4,6 +4,6 @@ import { CreditoService } from './credito.service';
 
 @Module({
   controllers: [CreditoController],
-  providers: [CreditoService]
+  providers: [CreditoService],
 })
 export class CreditoModule {}
