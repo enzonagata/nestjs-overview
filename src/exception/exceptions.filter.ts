@@ -12,14 +12,12 @@ export class ExceptionsFilter<T> implements ExceptionFilter {
     // const statusCode = exception.response.statusCode;
     // response.status(statusCode).send(this.buildError(exception.response.validationResult, statusCode));
 
-    response.status(exception.status).send(this.buildError(exception.response.message, exception.status));
+    response
+      .status(exception.status)
+      .send(this.buildError(exception.response.message, exception.status));
   }
 
-  buildError(
-    message: string,
-    status: number,
-    errors?: any[]
-  ) {
+  buildError(message: string, status: number, errors?: any[]) {
     const res = new ResponseModel();
     res.status = status;
     res.message = message;
@@ -36,5 +34,3 @@ export class ResponseModel {
   errors: any;
   message: string;
 }
-
-

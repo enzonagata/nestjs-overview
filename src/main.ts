@@ -6,10 +6,19 @@ import { ExceptionsFilter } from './exception/exceptions.filter';
 import validationExceptionFactory from './exception/factories/validation.exception.factory';
 import { logger } from './middleware/logger.middleware';
 
+import * as bodyParser from 'body-parser';
+import { ResponseInterceptor } from './interceptors/response.interceptor';
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.use(bodyParser.json({ limit: '10mb' }));
+  app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+
   app.use(logger);
-  app.useGlobalPipes(new ValidationPipe())
+  app.useGlobalPipes(new ValidationPipe());
+
+  // app.useGlobalInterceptors(new ResponseInterceptor());
 
   // app.useGlobalGuards(new AuthGuard())
 
@@ -18,9 +27,7 @@ async function bootstrap() {
   //   exceptionFactory: validationExceptionFactory
   // }))
 
-  
-
-  app.useGlobalFilters(new ExceptionsFilter());
+  // app.useGlobalFilters(new ExceptionsFilter());
   await app.listen(3000);
 }
 bootstrap();
