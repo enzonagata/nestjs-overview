@@ -10,11 +10,16 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+import { type } from 'os';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 import { AlunoService } from './aluno.service';
 //import { AuthGuard } from 'src/auth/auth.guard';
 import { AlunoDTO } from './dto/aluno.dto';
 import { AlalunoCEPDTO } from './dto/alunoCEP.dto';
+
+export class Type {
+  type: string;
+}
 
 //@UseGuards(AuthGuard)
 @UseInterceptors(ResponseInterceptor)
@@ -27,44 +32,14 @@ export class AlunoController {
     return 'Hello aluno..';
   }
 
-  @Get('cep-buscar')
+  @Get('cep')
   async alunoCepBuscar(@Body() payload: AlalunoCEPDTO) {
     return this.alunoService.buscaCEP(payload.cep).then((res) => res);
   }
 
-  @Get('cep')
-  async alunoCep(@Body() payload: AlalunoCEPDTO) {
-    // let res;
-
-    // res = await this.alunoService.buscaCEP(payload.cep);
-
-    // res = this.alunoService.buscaCEP(payload.cep).then((res) => res);
-
-    const ceps = ['15700282', '15704282', '15700012', '01015123'];
-
-    // Método assincrono
-    // Assim, pode se perceber, que a requisição foi feita, porem de forma assincrona, não respeitando a ordem do array
-    ceps.map(async (item) => {
-      const a = await this.alunoService.buscaCEP(item);
-      console.log(`${item}, ${a}`);
-    });
-
-    // ceps.forEach(async (item) => {
-    //   const a = await this.alunoService.buscaCEP(item);
-    //   console.log(`${item}, ${a}`);
-    // });
-
-    // Método sincrono
-    // console.log('Iniciando com o for');
-    // for (const item of ceps) {
-    //   const a = await this.alunoService.buscaCEP(item);
-    //   console.log(`${item}, ${a}`);
-    // }
-
-    // return await new Promise((callback) => {
-    //   const res = this.alunoService.buscaCEP(payload.cep);
-    //   callback(res);
-    // });
+  @Get('loop')
+  async alunoCep(@Body() payload: Type) {
+    return this.alunoService.loop(payload);
   }
 
   @Post()
