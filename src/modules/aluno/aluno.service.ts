@@ -19,29 +19,58 @@ export class AlunoService {
   }
 
   async loop(payload: Type) {
-    const ceps = ['15700282', '15704282', '15700012', '01015123'];
+    const ceps = ['15700282', '15704282', '15700012', '01001000'];
 
+    //exemplo de foreach
     if (payload.type == 'foreach') {
-      const a = ceps.forEach(async (item) => {
+      console.log('Foreach iniciado...');
+      const res = ceps.forEach(async (item) => {
         const a = await this.buscaCEP(item);
         console.log(`${item}, ${a}`);
         return a;
       });
-      return a;
+      console.log(res);
+      console.log('Foreach terminado...');
+      return res;
     }
 
+    //exemplo usando o map
     if (payload.type == 'map') {
-      ceps.map(async (item) => {
+      console.log('Map iniciado...');
+      const res = ceps.map((item) => {
+        //        const a = await this.buscaCEP(item);
+        const result = parseInt(item) * 2;
+        return result;
+      });
+      console.log(ceps);
+      console.log(res);
+      console.log('Map terminado...');
+      return res;
+    }
+
+    //exemplo usando o map com promise
+    if (payload.type == 'mapp') {
+      console.log('Mapp initialized');
+      const promises = ceps.map(async (item) => {
         const a = await this.buscaCEP(item);
         console.log(`${item}, ${a}`);
+        return a;
       });
+      await Promise.all(promises).then((a) => {
+        console.log(a);
+      });
+      console.log('Mapp Finished');
     }
 
+    //exemplo usando for
     if (payload.type == 'for') {
+      console.log('For iniciado...');
       for (const item of ceps) {
         const a = await this.buscaCEP(item);
-        console.log(`${item}, ${a}`);
+        console.log(a);
       }
+      console.log('For terminado...');
+      return;
     }
   }
 }
