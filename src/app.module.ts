@@ -9,4 +9,4 @@ import { CobrancaModule } from './modules/cobranca/cobranca.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
