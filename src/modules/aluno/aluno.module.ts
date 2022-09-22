@@ -6,8 +6,9 @@ import {
 } from '@nestjs/common';
 import { AlunoMiddleware } from 'src/middleware/aluno.middleware';
 import { AlunoController } from './aluno.controller';
-import { AlunoService } from './aluno.service';
+import { AlunoService } from './services/aluno.service';
 import { HttpModule } from '@nestjs/axios';
+import { BuscaCepRepository } from './repository/buscacep.repository';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { HttpModule } from '@nestjs/axios';
     }),
   ],
   controllers: [AlunoController],
-  providers: [AlunoService],
+  providers: [AlunoService, BuscaCepRepository],
 })
 export class AlunoModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

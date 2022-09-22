@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class AlalunoCEPDTO {
+export class AlunoCEPDTO {
   @IsNotEmpty()
   cep: string;
 }

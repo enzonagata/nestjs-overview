@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { CobrancaController } from './cobranca.controller';
-import { CobrancaService } from './cobranca.service';
+import { CobrancaService } from './services/cobranca.service';
 
 @Module({
   controllers: [CobrancaController],
-  providers: [CobrancaService]
+  providers: [CobrancaService],
 })
 export class CobrancaModule {}

@@ -12,10 +12,10 @@ import {
 } from '@nestjs/common';
 import { type } from 'os';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
-import { AlunoService } from './aluno.service';
+import { AlunoService } from './services/aluno.service';
 //import { AuthGuard } from 'src/auth/auth.guard';
 import { AlunoDTO } from './dto/aluno.dto';
-import { AlalunoCEPDTO } from './dto/alunoCEP.dto';
+import { AlunoCEPDTO } from './dto/alunoCEP.dto';
 
 export class Type {
   type: string;
@@ -33,8 +33,8 @@ export class AlunoController {
   }
 
   @Get('cep')
-  async alunoCepBuscar(@Body() payload: AlalunoCEPDTO) {
-    return this.alunoService.buscaCEP(payload.cep).then((res) => res);
+  async alunoCepBuscar(@Body() payload: AlunoCEPDTO) {
+    return this.alunoService.buscaCEP(payload).then((res) => res);
   }
 
   @Get('loop')

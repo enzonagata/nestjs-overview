@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { AlunoCEPDTO } from '../dto/alunoCEP.dto';
 import { BuscaCepRepository } from '../repository/buscacep.repository';
 
 export class Type {
@@ -8,6 +9,11 @@ export class Type {
 @Injectable()
 export class AlunoService {
   constructor(private readonly buscarcepRepository: BuscaCepRepository) {}
+
+  async buscaCEP(payload: AlunoCEPDTO) {
+    const res = await this.buscarcepRepository.buscaCEP(payload.cep);
+    return res;
+  }
 
   async loop(payload: Type) {
     const ceps = ['15700282', '15704282', '15700012', '01001000'];
