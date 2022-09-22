@@ -5,7 +5,7 @@ import {
   RequestMethod,
 } from '@nestjs/common';
 import { AlunoMiddleware } from 'src/middleware/aluno.middleware';
-import { AlunoController } from './aluno.controller';
+import { AlunoController } from './controllers/aluno.controller';
 import { AlunoService } from './services/aluno.service';
 import { HttpModule } from '@nestjs/axios';
 import { BuscaCepRepository } from './repository/buscacep.repository';
