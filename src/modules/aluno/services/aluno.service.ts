@@ -1,6 +1,5 @@
-import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { firstValueFrom } from 'rxjs';
+import { BuscaCepRepository } from '../repository/buscacep.repository';
 
 export class Type {
   type: string;
@@ -8,15 +7,7 @@ export class Type {
 
 @Injectable()
 export class AlunoService {
-  constructor(private readonly httpService: HttpService) {}
-
-  async buscaCEP(cep: string) {
-    const response = this.httpService.get(
-      `https://viacep.com.br/ws/${cep}/json/`,
-    );
-    const res = await firstValueFrom(response);
-    return res.data;
-  }
+  constructor(private readonly buscarcepRepository: BuscaCepRepository) {}
 
   async loop(payload: Type) {
     const ceps = ['15700282', '15704282', '15700012', '01001000'];
@@ -25,7 +16,7 @@ export class AlunoService {
     if (payload.type == 'foreach') {
       console.log('Foreach iniciado...');
       const res = ceps.forEach(async (item) => {
-        const a = await this.buscaCEP(item);
+        const a = await this.buscarcepRepository.buscaCEP(item);
         console.log(`${item}, ${a}`);
         return a;
       });
@@ -52,7 +43,7 @@ export class AlunoService {
     if (payload.type == 'mapp') {
       console.log('Mapp initialized');
       const promises = ceps.map(async (item) => {
-        const a = await this.buscaCEP(item);
+        const a = await this.buscarcepRepository.buscaCEP(item);
         console.log(`${item}, ${a}`);
         return a;
       });
@@ -66,7 +57,7 @@ export class AlunoService {
     if (payload.type == 'for') {
       console.log('For iniciado...');
       for (const item of ceps) {
-        const a = await this.buscaCEP(item);
+        const a = await this.buscarcepRepository.buscaCEP(item);
         console.log(a);
       }
       console.log('For terminado...');
